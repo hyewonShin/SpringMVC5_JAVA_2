@@ -1,6 +1,6 @@
 package kr.co.hyewon.beans;
 
-public class BaordInfoBean {
+public class BoardInfoBean {
 
 	private int board_info_idx;
 	private String board_info_name;
