@@ -15,6 +15,7 @@ public class TopMenuInterceptor implements HandlerInterceptor{
 	
 //	@Autowired
 //	private TopMenuService topMenuService;
+	
 // ** 주의할 점 **
 // Interceptor에서는 위와 같이 @Autowired를  사용해서 자동주입을 받지 못한다!
 //그래서 Interceptor을 등록하는 곳에서 bean을 주입받은 다음에 생성자로 넘겨서 작업해줘야 한다.
