@@ -1,6 +1,5 @@
 package kr.co.hyewon.validator;
 
-import javax.validation.Validator;
 
 import org.springframework.validation.Errors;
 
@@ -21,13 +20,14 @@ public class UserValidator implements org.springframework.validation.Validator{
 		// target을 userBean으로 형변환 해준다.
 		UserBean userBean = (UserBean)target;
 		
+		// 비밀번호 재확인 유효성 검사
 		if(userBean.getUser_pw().equals(userBean.getUser_pw2()) == false) {
 			errors.rejectValue("user_pw", "NotEquals");
 			errors.rejectValue("user_pw2", "NotEquals");
 			// user_pw,user_pw2 에 대한 오류는 NotEquals로 설정해준다.
-			
 		}
 		
+		// 아이디 중복검사 유효성 검사
 		if(userBean.isUserIdExist() == false) {
 			errors.rejectValue("user_id", "DontCheckUserIdExist");
 		}
