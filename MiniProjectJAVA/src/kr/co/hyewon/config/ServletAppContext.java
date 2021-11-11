@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import kr.co.hyewon.beans.UserBean;
+import kr.co.hyewon.interceptor.CheckLoginInterceptor;
 import kr.co.hyewon.interceptor.TopMenuInterceptor;
 import kr.co.hyewon.mapper.BoardMapper;
 import kr.co.hyewon.mapper.TopMenuMapper;
@@ -128,6 +129,11 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		reg1.addPathPatterns("/**");  //모든 요청에 대해 해당 인터셉터를 통과하도록 설정.
+	
+		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserBean);
+		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);
+		reg2.addPathPatterns("/user/modify","/user/logout","/board/*"); //modify 페이지에서만 인터셉터를 통과하도록 함.
+		reg2.excludePathPatterns("/board/main");
 	}
 	
 	// properites를 message로 으로 등록 
