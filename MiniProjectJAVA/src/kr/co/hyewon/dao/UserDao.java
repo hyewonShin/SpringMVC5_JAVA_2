@@ -12,11 +12,18 @@ public class UserDao {
 	@Autowired
 	private UserMapper userMapper;
 	
+	// 아이디 중복확인 (유효성 검사)
 	public String checkUserIdExist(String user_id) {
 		return userMapper.checkUserIdExist(user_id);
 	}
 	
+	// 회원가입 (서버에 저장)
 	public void addUserInfo(UserBean joinUserBean) {
 		userMapper.addUserInfo(joinUserBean);
+	}
+	
+	// 로그인 처리
+	public UserBean getLoginUserInfo(UserBean tempLoginUserBean) {
+		return userMapper.getLoginUserInfo(tempLoginUserBean);
 	}
 }

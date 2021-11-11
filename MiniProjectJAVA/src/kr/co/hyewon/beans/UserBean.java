@@ -23,12 +23,17 @@ public class UserBean {
 	@Pattern(regexp="[a-zA-Z0-9]*")
 	private String user_pw2;
 	
+	// 사용자 아이디 존재 여부값. 
 	private boolean userIdExist;
 	
-	// 처음에 빈이 생성될 때는 중복검사다 안된거니까 false로 설정.
+	// 로그인 여부값. 
+	private boolean userLogin;
+	
+	// 처음에 빈이 생성될 때는 중복검사 안된거니까 false로 설정.
 	// 최초에 false값을 가질 수 있도록 생성자로 설정해줌.
 	public UserBean() {
 		this.userIdExist = false;
+		this.userLogin = false;
 	}
 	
 	
@@ -69,7 +74,11 @@ public class UserBean {
 	public void setUserIdExist(boolean userIdExist) {
 		this.userIdExist = userIdExist;
 	}
-
-	
+	public boolean isUserLogin() {
+		return userLogin;
+	}
+	public void setUserLogin(boolean userLogin) {
+		this.userLogin = userLogin;
+	}
 
 }
