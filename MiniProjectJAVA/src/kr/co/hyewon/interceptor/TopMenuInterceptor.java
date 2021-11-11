@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import kr.co.hyewon.beans.BoardInfoBean;
+import kr.co.hyewon.beans.UserBean;
 import kr.co.hyewon.service.TopMenuService;
 
 public class TopMenuInterceptor implements HandlerInterceptor{
@@ -21,9 +22,11 @@ public class TopMenuInterceptor implements HandlerInterceptor{
 //그래서 Interceptor을 등록하는 곳에서 bean을 주입받은 다음에 생성자로 넘겨서 작업해줘야 한다.
 	
 	private TopMenuService topMenuService;
+	private UserBean loginUserBean;
 	
-	public TopMenuInterceptor(TopMenuService topMenuService) {
+	public TopMenuInterceptor(TopMenuService topMenuService, UserBean loginUserBean) {
 		this.topMenuService = topMenuService;
+		this.loginUserBean = loginUserBean;
 	}
 	
 	
@@ -33,6 +36,7 @@ public class TopMenuInterceptor implements HandlerInterceptor{
 		// TODO Auto-generated method stub
 		List<BoardInfoBean> topMenuList = topMenuService.getTopMenuList();
 		request.setAttribute("topMenuList", topMenuList);
+		request.setAttribute("loginUserBean", loginUserBean);
 		
 		return true;
 	}
