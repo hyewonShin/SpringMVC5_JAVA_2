@@ -26,4 +26,14 @@ public class UserDao {
 	public UserBean getLoginUserInfo(UserBean tempLoginUserBean) {
 		return userMapper.getLoginUserInfo(tempLoginUserBean);
 	}
+	
+	// 정보수정페이지로 사용자 ID, NAME 가져오기
+	public UserBean getModifyUserInfo(int user_idx) {
+		return userMapper.getModifyUserInfo(user_idx);
+	}
+	
+	// 정보수정
+	public void modifyUserInfo(UserBean modifyUserBean) {
+		userMapper.modifyUserInfo(modifyUserBean);
+	}
 }

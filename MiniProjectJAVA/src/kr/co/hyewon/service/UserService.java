@@ -45,4 +45,24 @@ public class UserService {
 			loginUserBean.setUserLogin(true); //로그인 성공시 true값을 넣어준다.
 		}
 	}
+	
+	// 정보수정 (사용자 id, name 가져오기)
+	public void getModifyUserInfo(UserBean modifyUserBean) {
+		
+		// error.properties에  tempModifyUserBean이 설정되어 있으므로 tempModifyUserBean에 정보를 저장한다.
+		UserBean tempModifyUserBean = userDao.getModifyUserInfo(loginUserBean.getUser_idx());
+	
+		modifyUserBean.setUser_id(tempModifyUserBean.getUser_id());
+		modifyUserBean.setUser_name(tempModifyUserBean.getUser_name());
+		modifyUserBean.setUser_idx(loginUserBean.getUser_idx());
+	}
+	
+	public void modifyUserInfo(UserBean modifyUserBean) {
+		
+		modifyUserBean.setUser_idx(loginUserBean.getUser_idx());
+		
+		userDao.modifyUserInfo(modifyUserBean);
+	}
+	
+	
 }
