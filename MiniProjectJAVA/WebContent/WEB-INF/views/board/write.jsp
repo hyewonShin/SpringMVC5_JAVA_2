@@ -26,7 +26,7 @@
 			<div class="card shadow">
 				<div class="card-body">
 					<form:form action="${root }board/write_pro" method="post" modelAttribute="writeContentBean" enctype="multipart/form-data">
-						<form:hidden path="content_board_idx"/>
+						<form:hidden path="content_board_idx"/> <!-- 글쓰기 화면에서 게시판 번호 데이터를 표시하기위해 넘겨준다. -->
 						<div class="form-group">
 							<form:label path="content_subject">제목</form:label>
 							<form:input path="content_subject" class="form-control"/>
@@ -62,8 +62,8 @@
 
 <!--  enctype="multipart/form-data"
 - 문자열 데이터 뿐만 아니라 사용자가 선택한 이미지 파일 또한 같이 전달된다.
-- 하지만 사용시 유효성 검사 부분에서 에러가 생기기 때문에 
-  StandardServletMultipartResolver 빈을 생성해서 해결해준다.
+- 하지만 사용시 유효성 검사 부분에서 에러가 생기기 때문에   ServletAppContext, SpringConfigClass에서 
+  StandardServletMultipartResolver, customizeRegistration 빈을 생성해서 해결해준다.
 -->
 
     

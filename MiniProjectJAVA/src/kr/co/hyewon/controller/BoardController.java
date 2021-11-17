@@ -1,5 +1,7 @@
 package kr.co.hyewon.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.hyewon.beans.ContentBean;
-import kr.co.hyewon.mapper.BoardMapper;
 import kr.co.hyewon.service.BoardService;
 
 @Controller
@@ -28,6 +29,12 @@ public class BoardController {
 						Model model) {
 
 		model.addAttribute("board_info_idx", board_info_idx);
+		
+		String boardInfoName = boardService.getBoardInfoName(board_info_idx);
+		model.addAttribute("boardInfoName",boardInfoName);
+		
+		List<ContentBean> contentList = boardService.getContentList(board_info_idx);
+		model.addAttribute("contentList",contentList);
 
 		return "board/main";
 	}
