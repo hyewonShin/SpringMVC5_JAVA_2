@@ -32,7 +32,7 @@ public class UserDao {
 		return userMapper.getModifyUserInfo(user_idx);
 	}
 	
-	// 정보수정
+	// 정보수정(서버에 저장)
 	public void modifyUserInfo(UserBean modifyUserBean) {
 		userMapper.modifyUserInfo(modifyUserBean);
 	}

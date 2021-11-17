@@ -57,6 +57,7 @@ public class UserService {
 		modifyUserBean.setUser_idx(loginUserBean.getUser_idx());
 	}
 	
+	// 정보수정(서버에 저장)
 	public void modifyUserInfo(UserBean modifyUserBean) {
 		
 		modifyUserBean.setUser_idx(loginUserBean.getUser_idx());
