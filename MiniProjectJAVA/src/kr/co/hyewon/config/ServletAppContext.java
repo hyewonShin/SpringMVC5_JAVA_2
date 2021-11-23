@@ -24,10 +24,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import kr.co.hyewon.beans.UserBean;
 import kr.co.hyewon.interceptor.CheckLoginInterceptor;
+import kr.co.hyewon.interceptor.CheckWriterInterceptor;
 import kr.co.hyewon.interceptor.TopMenuInterceptor;
 import kr.co.hyewon.mapper.BoardMapper;
 import kr.co.hyewon.mapper.TopMenuMapper;
 import kr.co.hyewon.mapper.UserMapper;
+import kr.co.hyewon.service.BoardService;
 import kr.co.hyewon.service.TopMenuService;
 
 // Spring MVC 프로젝트에 관련된 설정을 하는 클래스
@@ -60,6 +62,9 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Resource(name = "loginUserBean")
 	private UserBean loginUserBean;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	// Controller의 메서드가 반환하는 jsp의 이름 앞뒤에 경로와 확장자를 붙혀주도록 설정한다.
 	@Override
@@ -135,6 +140,10 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);
 		reg2.addPathPatterns("/user/modify","/user/logout","/board/*"); //modify 페이지에서만 인터셉터를 통과하도록 함.
 		reg2.excludePathPatterns("/board/main");
+		
+		CheckWriterInterceptor checkWriterInterceptor = new CheckWriterInterceptor(loginUserBean, boardService);
+		InterceptorRegistration reg3 = registry.addInterceptor(checkWriterInterceptor);
+		reg3.addPathPatterns("/board/modify","/board/delete");
 	}
 	
 	// properites를 message로 으로 등록 
