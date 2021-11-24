@@ -21,13 +21,13 @@ public class BoardService {
 
 	@Value("${path.upload}")
 	private String path_upload;
-	
+
 	@Autowired
 	private BoardDao boardDao;
 
 	@Resource(name = "loginUserBean")
 	private UserBean loginUserBean;
-	
+
 	//파일을 저장하는 메서드
 	//파일 이름이 같으면 덮어씌워지는걸 방지하기 위해 현재 시각을 파일 이름 앞으로 붙여줌.
 	private String saveUploadFile(MultipartFile upload_file) {
@@ -54,19 +54,31 @@ public class BoardService {
 			writeContentBean.setContent_file(file_name);
 		}
 		writeContentBean.setContent_writer_idx(loginUserBean.getUser_idx());
-	
+
 		boardDao.addContentInfo(writeContentBean);
 	}
-	
+
 	public String getBoardInfoName(int board_info_idx) {
 		return boardDao.getBoardInfoName(board_info_idx);
 	}
-	
+
 	public List<ContentBean> getContentList(int board_info_idx) {
 		return boardDao.getContentList(board_info_idx);
 	}
-	
+
 	public 	ContentBean getContentInfo(int content_idx) {
 		return boardDao.getContentInfo(content_idx);
+	}
+
+	public void modifyContentInfo(ContentBean modifyContentBean) {
+
+		MultipartFile upload_file = modifyContentBean.getUpload_file();
+		
+		if(upload_file.getSize() > 0) {
+			String file_name = saveUploadFile(upload_file);
+			modifyContentBean.setContent_file(file_name);
+		}
+		
+		boardDao.modifyContentInfo(modifyContentBean);
 	}
 }

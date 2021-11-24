@@ -26,30 +26,28 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form  action="${root }user/modify_pro" method="post" modelAttribute="modifyUserBean">
+					<form:form action='${root }user/modify_pro' method='post' modelAttribute="modifyUserBean">
 						<div class="form-group">
 							<form:label path="user_name">이름</form:label>
-							<form:input path="user_name" class="form-control" readonly="true"/>
-							<!-- html의 disabled="disabled"를 사용하면 서버로 값이 넘어가지 못해 문제가 생긴다. -->
-							<!-- 그래서 수정은 불가능하지만, 서버로 값이 넘어갈 수 있는 readonly="true"로 바꿔준다. -->
+							<form:input path="user_name" class='form-control' readonly="true"/>
 						</div>
 						<div class="form-group">
 							<form:label path="user_id">아이디</form:label>
-							<form:input path="user_id" class="form-control" readonly="true"/>
+							<form:input path="user_id" class='form-control' readonly="true"/>
 						</div>
-						<div class="form-group" >
+						<div class="form-group">
 							<form:label path="user_pw">비밀번호</form:label>
-							<form:password path="user_pw" class="form-control"/>
-							<form:errors path="user_pw" style='color:red'/>
+							<form:password path="user_pw" class='form-control'/>
+							<form:errors path='user_pw' style='color:red'/>
 						</div>
 						<div class="form-group">
 							<form:label path="user_pw2">비밀번호 확인</form:label>
-							<form:password path="user_pw2" class="form-control" />
-							<form:errors path="user_pw2" style='color:red'/>
+							<form:password path="user_pw2" class='form-control'/>
+							<form:errors path='user_pw2' style='color:red'/>
 						</div>
 						<div class="form-group">
 							<div class="text-right">
-								<form:button class="btn btn-primary">정보수정</form:button>
+								<form:button class='btn btn-primary'>정보수정</form:button>
 							</div>
 						</div>
 					</form:form>
