@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hyewon.beans.ContentBean;
 import kr.co.hyewon.beans.UserBean;
+import kr.co.hyewon.beans.PageBean;
 import kr.co.hyewon.dao.BoardDao;
 
 @Service
@@ -22,6 +24,12 @@ public class BoardService {
 	@Value("${path.upload}")
 	private String path_upload;
 
+	@Value("${page.listcnt}")
+	private int page_listcnt;
+	
+	@Value("${page.paginationcnt}")
+	private int page_paginationcnt;
+	
 	@Autowired
 	private BoardDao boardDao;
 
@@ -62,8 +70,15 @@ public class BoardService {
 		return boardDao.getBoardInfoName(board_info_idx);
 	}
 
-	public List<ContentBean> getContentList(int board_info_idx) {
-		return boardDao.getContentList(board_info_idx);
+	public List<ContentBean> getContentList(int board_info_idx, int page) {
+	
+		//Rowbouns는 인덱스 번호가 0번부터 시작한다.
+		
+		int start = (page -1) * page_listcnt;
+		RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		
+		return boardDao.getContentList(board_info_idx, rowBounds);
+	
 	}
 
 	public 	ContentBean getContentInfo(int content_idx) {
@@ -84,5 +99,14 @@ public class BoardService {
 	
 	public void deleteContentInfo(int content_idx) {
 		boardDao.deleteContentInfo(content_idx);
+	}
+	
+	public PageBean getContentCnt(int content_board_idx, int currentPage) {
+		
+		int content_cnt = boardDao.getContentCnt(content_board_idx);
+		
+		PageBean pageBean = new PageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+	
+		return pageBean;
 	}
 }
