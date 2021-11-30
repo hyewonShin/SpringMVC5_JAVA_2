@@ -42,7 +42,7 @@
 								<tr>
 									<td class="text-center d-none d-md-table-cell">${obj.content_idx }</td>
 									<td><a
-										href='${root }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}'>${obj.content_subject }</a></td>
+										href='${root }board/read?board_info_idx=${board_info_idx}&content_idx=${obj.content_idx}&page=${page}'>${obj.content_subject }</a></td>
 									<td class="text-center d-none d-md-table-cell">${obj.content_writer_name }</td>
 									<td class="text-center d-none d-md-table-cell">${obj.content_date }</td>
 								</tr>
